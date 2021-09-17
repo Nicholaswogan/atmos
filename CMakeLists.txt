@@ -10,6 +10,11 @@ if (NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
   set(CMAKE_BUILD_TYPE "Release" CACHE STRING "" FORCE)
 endif()
 
+if ("${CMAKE_Fortran_COMPILER_ID}" MATCHES "GNU" 
+   AND CMAKE_BUILD_TYPE STREQUAL "Debug")
+   set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -Wunused")
+endif()
+
 set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -fno-automatic -fdefault-integer-8 -fdefault-real-8")
 
 set(PHOTOCHEM_SUBS ${CMAKE_SOURCE_DIR}/PHOTOCHEM/SUBROUTINES/Photgrid.f
